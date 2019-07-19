@@ -4,6 +4,7 @@
     
     
     use common\models\User;
+    use Yii;
     use yii\helpers\VarDumper;
 
     class AccessRule extends \yii\filters\AccessRule {
@@ -30,6 +31,8 @@
     
                 } elseif (!$user->getIsGuest() && $role === User::$roles[$user->identity->role]) {
                     return true;
+                } else {
+                    return Yii::$app->response->redirect(Yii::$app->urlManagerFrontend->createUrl(''));
                 }
             }
             
